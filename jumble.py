@@ -117,9 +117,8 @@ def join_game(game, message, mode='auto', time=60):
             else:
                 common.total_players += 1
                 common.participants.append(user_id)
-                # print(message, 'yyyy')
                 bot.send_message(
-                    chat_id, f'{first_name} joined. \n There is now {common.total_players} players')
+                    chat_id, f'{first_name} joined. \n There are now {common.total_players} players')
                 common.scour_Dict[message.from_user.id] = {'points':0,"user_name":message.from_user.first_name }
                 print(common.scour_Dict)
         elif common.gameCounter > 10:
@@ -165,7 +164,7 @@ def winner(message):
 
             🥈 {name[sec]} got {li2[sec]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️:
 
-            🥉 {name[thd]} who got {li2[thd]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️:
+            🥉 {name[thd]} got {li2[thd]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️:
 
             Congratulations {name[firs]} 👏🎊Keep it up and practice more. 📚📚📚''',
                              parse_mode='markdown'
