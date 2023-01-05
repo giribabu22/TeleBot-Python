@@ -1,8 +1,8 @@
 import common
 import config
 import telebot
-from telebot.types import Message
-from telebot import types
+# from telebot.types import Message
+# from telebot import types
 import time
 import datetime
 import os,time
@@ -22,7 +22,6 @@ DB = DynamoDB_con()
 # print(DB.get_words())
 
 r = 60
-common.gameCounter = 1
 common.game_creater = {}
 common.participants = []
 common.scour_Dict = {}
@@ -53,8 +52,6 @@ def create_game(game, message, t=60):
     keyboard = telebot.types.InlineKeyboardMarkup()
     print(message.chat.id, message.message_id)
     chat_id = message.chat.id
-    # return
-    print(game)
     if (game == '/jumbleword' or game == '/jumbleword@botmorningbot_bot'):
         print('----> inside create game ')
         keyboard.row(
