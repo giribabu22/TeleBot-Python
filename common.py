@@ -13,7 +13,7 @@ for dic in data:
 gameStarted = False #  to block creating new game if one is going on
 joinFlag = True ## to block joining patrticipants after 60 seconds
 # chat_type = None
-gameCounter = 0
+gameCounter = 1
 game_creater = {}
 participants = []
 nextButtonCount = False

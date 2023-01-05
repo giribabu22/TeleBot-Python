@@ -85,7 +85,7 @@ def join_game(game, message, mode='auto', time=60):
 
     if (game == 'join-jumble'):
         first_name = message.from_user.first_name
-        if time == 0 and common.gameCounter < 10:
+        if time == 0 and common.gameCounter <= 10:
             if mode == 'auto':
                 bot.send_message(
                     chat_id, f'Here is the first word ⬇',
@@ -160,11 +160,11 @@ def winner(message):
 
             bot.send_message(chat_id, f''' Thank you for participating in today's  Jumble word Game! 🥳🎉🎉🎉
 
-            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️⭐️:
+            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️⭐️⭐️:
 
-            🥈 {name[sec]} got {li2[sec]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️:
+            🥈 {name[sec]} got {li2[sec]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️⭐️:
 
-            🥉 {name[thd]} got {li2[thd]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️:
+            🥉 {name[thd]} got {li2[thd]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️:
 
             Congratulations {name[firs]} 👏🎊Keep it up and practice more. 📚📚📚''',
                              parse_mode='markdown'
@@ -172,9 +172,9 @@ def winner(message):
         else:
             bot.send_message(chat_id, f''' Thank you for participating in today's  Jumble word Game! 🥳🎉🎉🎉
 
-            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️⭐️:
+            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️⭐️⭐️:
 
-            🥈 {name[sec]} got {li2[sec]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️:
+            🥈 {name[sec]} got {li2[sec]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️⭐️:
 
             Congratulations {name[firs]} 👏🎊Keep it up and practice more. 📚📚📚''',
                              parse_mode='markdown'
@@ -182,7 +182,7 @@ def winner(message):
     else:
         bot.send_message(chat_id, f''' Thank you for participating in today's  Jumble word Game! 🥳🎉🎉🎉
 
-            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter} Questions correct ⭐️⭐️⭐️⭐️⭐️:
+            🥇 {name[firs]} got {li2[firs]//2}/{common.gameCounter-1} Questions correct ⭐️⭐️⭐️⭐️⭐️:
 
             Congratulations {name[firs]} 👏🎊Keep it up and practice more. 📚📚📚''',
                          parse_mode='markdown'
