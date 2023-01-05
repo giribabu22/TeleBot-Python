@@ -12,9 +12,7 @@ class DynamoDB_con():
 
     def send_data(self, data, tableName):
         db = self.dynamo_client.Table(tableName)
-        db.put_item(
-            Item=data
-        )
+        db.put_item(Item=data)
         print('Data is sending to the database!!!!')
 
     def read_read(self, tableName):
@@ -27,6 +25,20 @@ class DynamoDB_con():
             data.extend(response['Items'])
         print('total out put data: ',data)
         return data, len(data)
-    def update_table(self,data,tableName):
-        table = self.dynamo_client.Table(tableName)
+    # def read_by_game(self, tableName,gameId):
+
+    # def update_table(self,data,tableName):
+    #     table = self.dynamo_client.Table(tableName)
+
+
+    def get_words(self):
+        table = self.dynamo_client.Table("TB_JumbledWord_bank")
+        response = table.scan()
+        data = response['Items']
+        while 'LastEvaluatedKey' in response:
+            response = table.scan(
+                ExclusiveStartKey=response['LastEvaluatedKey'])
+            data.extend(response['Items'])
+        # print('total out put data: ',data)
+        return data, len(data)
         

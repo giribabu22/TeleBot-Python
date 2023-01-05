@@ -1,7 +1,15 @@
 import random
 import time
 import jumble
+import DB_class
+from DB_class import DynamoDB_con
 
+DB = DynamoDB_con()
+
+data,l = DB.get_words()
+words =[]
+for dic in data:
+    words.append(dic['word'])
 gameStarted = False #  to block creating new game if one is going on
 joinFlag = True ## to block joining patrticipants after 60 seconds
 # chat_type = None
@@ -19,12 +27,15 @@ wait60sec = 0  #
 wait40sec = 10 # 
 word = ''
 used_words = []
+day = 0
 scour_Dict = {}
+# red_scour =   {}
 run        = False
-
+DB = DB_class.DynamoDB_con()
+# DB.read_read('TB_JumbleWord_Bank')
 def get_jumble():
     global word
-    words = ['Apple', 'Apocalypse', 'cat', 'computer', 'bird', 'national']
+    # words =  DB.get_words()
     # words = ['furze', 'fuses', 'fusee', 'fused', 'fusel', 'fuser', 'fussy', 'gales', 'galls', 'gamba', 'gamer', 'gamin']
     word = random.choices(words)[0].upper()
     # if len(words) > 0 and len(used_words) == 0:
@@ -48,8 +59,6 @@ def get_jumble():
 
 # # Join timer (60s) and word timer (40s)
 def start_timer(name, sec, game, message):
-    
-    print(time_breaker, '8888888888888*') 
     global wait60sec
     for i in range(sec, -1, -1):
         if time_breaker:
