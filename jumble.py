@@ -85,7 +85,7 @@ def join_game(game, message, mode='auto', time=60):
 
     if (game == 'join-jumble'):
         first_name = message.from_user.first_name
-        if time == 0 and common.gameCounter <= 10:
+        if time == 0 and common.gameCounter < 10:
             if mode == 'auto':
                 bot.send_message(
                     chat_id, f'Here is the first word ⬇',
@@ -306,7 +306,6 @@ def main():
             try:
                 for k in dic:
                     if dic[k] != dic2[k]:
-                        print('Wrong')
                         bool = False
                         break
 

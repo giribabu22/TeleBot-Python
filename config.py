@@ -1,4 +1,4 @@
-API_KEY = "5931465733:AAEMeG-A_UW9wql2u78zSZWx7amSNGJ0zgE" # Telegram bot api key
+API_KEY = "" # Telegram bot api key
 
 ## instructions 
 '''
