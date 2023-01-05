@@ -21,7 +21,7 @@ DB = DynamoDB_con()
 
 # print(DB.get_words())
 
-
+r = 60
 common.gameCounter = 1
 common.game_creater = {}
 common.participants = []
@@ -46,7 +46,7 @@ def alert(messageId, msg, show_alert=False):
         bot.answer_callback_query(messageId, msg)
 
 
-def create_game(game, message, t=20):
+def create_game(game, message, t=60):
     print(message.from_user.id, message.from_user.first_name,
           'created jumble here ---')
     global editJoinMsg
@@ -67,7 +67,7 @@ def create_game(game, message, t=20):
             reply_markup=keyboard,
             parse_mode='markdown'
         )
-        if t == 20:
+        if t == 60:
             bot.send_message(
                 chat_id, f'{first_name} joined. \n There is now {common.total_players} players')
             common.scour_Dict[message.from_user.id] = {'points':0,"user_name":message.from_user.first_name }
@@ -78,16 +78,13 @@ def create_game(game, message, t=20):
             join_counter.start()
 
 
-def join_game(game, message, mode='auto', time=20):
-    # jumbled = common.get_jumble()
-    # chat_type = message.chat.types
+def join_game(game, message, mode='auto', time=60):
     if mode == 'mannual':
         chat_id = message.json['message']['chat']['id']
     else:
         chat_id = message.json['chat']['id']
     global current_word_Message
     user_id = message.from_user.id
-    # print(message.from_user.first_name)
     if (game == 'join-jumble'):
         first_name = message.from_user.first_name
         if time == 0 and common.gameCounter <= 10:
@@ -133,18 +130,6 @@ def join_game(game, message, mode='auto', time=20):
             winner_announce = threading.Thread(
                 target=common.start_timer, args=('ques-wait', 1, 'join-jumble', message))
             winner_announce.start()
-
-            # thread for posting data to database
-            # if common.chat_type == 'supergroup':
-            # threads = threading.Thread(target=db_operations.post_data, args=(common.participants, 'temp_session'))
-            # threads.start()
-
-            # common.game_creater['total_common.participants'] = len(common.participants)
-            # print(common.game_creater, '67676767776')
-            # creator = threading.Thread(target=db_operations.post_data, args=(common.game_creater, 'jumble_engagement'))
-            # creator.start()
-            # alert(message.id, f'10/10 word completed')
-
 
 def winner(message):
     print('game over',)
@@ -336,10 +321,10 @@ def main():
                     if message.from_user.id not in common.red_scour:
                         common.red_scour[message.from_user.id] = 1
 
-            except:
-                bot.send_message(message.json['chat']['id'], f' Try again {message.from_user.first_name}🤔🤔',
-                                 parse_mode='markdown'
-                                 )
+            except:pass
+                # bot.send_message(message.json['chat']['id'], f' Try again {message.from_user.first_name}🤔🤔',
+                #                  parse_mode='markdown'
+                #                  )
 
     @bot.callback_query_handler(func=lambda call: True)
     def callback_query(option):
@@ -348,14 +333,7 @@ def main():
         common.run = True
         print(query, '000000000000')
         if query == 'join-jumble':
-            # storing common.participants data
-            # if option.from_user.id not in common.participants:
-            #     common.participants[option.from_user.id] = {
-            #         "Datetime": str(game_time),
-            #         "User_id": str(option.from_user.id),
-            #         "Points_Scored": 0
-            #     }
-            join_game(query, option, 'mannual', 20)
+            join_game(query, option, 'mannual', 60)
 
         elif query == 'next-jumble-word':
             if not (common.nextButtonCount):
