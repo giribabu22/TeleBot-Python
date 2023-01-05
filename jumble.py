@@ -85,6 +85,7 @@ def join_game(game, message, mode='auto', time=60):
         chat_id = message.json['chat']['id']
     global current_word_Message
     user_id = message.from_user.id
+
     if (game == 'join-jumble'):
         first_name = message.from_user.first_name
         if time == 0 and common.gameCounter <= 10:
