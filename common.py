@@ -58,7 +58,6 @@ def get_jumble():
         return f'🔤 {len(word)} letters: *{jumble}* \n 🤔 : *{" ".join(jumbled)}*'
     except Exception as e:
         jumble.ErrorHandler(e)
-        jumble.restartGame()
         print('error in get_jumble function :@@@@@@@@@@@@ ', e)
         
 # # Join timer (60s) and word timer (40s)
@@ -71,28 +70,26 @@ def start_timer(name, sec, game, message):
                 break
             time.sleep(1)
             wait60sec = i
-            print(i,sec)
             if i == 30 or i == 15:
                 if name == 'join-wait':
                     jumble.create_game('/jumbleword', message, i)
                     runner == 2
 
             elif i == 0:
-                print(runner, ': runner')
                 if name == 'guess-wait' and runner == 1:
                     jumble.auto_next_word(message)
                     runner == 2
                 elif name == 'join-wait':
                     jumble.join_game(game, message, 'auto', i)
                     runner == 2
-                elif name == 'ques-wait' and runner == 1:  # after 40 sec of 1 word
+                elif name == 'ques-wait' and runner == 3:  # after 40 sec of 1 word
                     jumble.winner(message, False)
-                    runner == 2
+                elif  name == 'ques-wait' and runner == 0:
+                    jumble.winner(message, False)
                 # elif name == 'ques-wait'and (runner):
                 #     jumble.winner(message, False)
                 #     runner = False
                 break
     except Exception as e:
         jumble.ErrorHandler(e)
-        jumble.restartGame()
         print('error in start_timer function @@@@@@@@@@@@@@', e)
