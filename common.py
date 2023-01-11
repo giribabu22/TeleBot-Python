@@ -27,6 +27,7 @@ time_breaker = False  # decision on breaking timer
 word = ''
 runner = 0
 used_words = []
+gessWord = ''
 day = 0
 scour_Dict = {}
 wait60sec = 0  # waiting time for particiants to join the game (60)
@@ -64,8 +65,10 @@ def get_jumble():
 
 def start_timer(name, sec, game, message):
     try:
-        global wait60sec, runner
+        global wait60sec, runner,word
         for i in range(sec, -1, -1):
+            print(i,'>>>>',sec)
+            # print("name: ",name)
             if time_breaker:
                 break
             time.sleep(1)
@@ -76,6 +79,7 @@ def start_timer(name, sec, game, message):
                     runner == 2
 
             elif i == 0:
+                word = ''
                 if name == 'guess-wait' and runner == 1:
                     jumble.auto_next_word(message)
                     runner == 2
@@ -91,5 +95,5 @@ def start_timer(name, sec, game, message):
                 #     runner = False
                 break
     except Exception as e:
-        jumble.ErrorHandler(e)
         print('error in start_timer function @@@@@@@@@@@@@@', e)
+        jumble.ErrorHandler(e)
