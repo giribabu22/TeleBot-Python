@@ -18,7 +18,7 @@ if 'Demo_' not in existing_tables:
             },
             {
                 'AttributeName': 'Id',
-                'KeyType': 'RANGE'  # Partition key
+                'KeyType': 'RANGE'  
             }
         ],
         AttributeDefinitions=[

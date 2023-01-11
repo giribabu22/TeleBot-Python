@@ -21,7 +21,7 @@ nextButtonCount = False  # decision for next word
 nextEditButton = None  # storing current (Next Word) button data
 editJoinMsg = None
 last_Right_ans = ''  # storing name of user who guessed current word
-nextFlag = False  # show or hide next button
+nextFlag = False  # show or hide the next button
 total_players = 0  # counting total participants
 time_breaker = False  # decision on breaking timer
 word = ''
@@ -30,12 +30,13 @@ used_words = []
 day = 0
 scour_Dict = {}
 wait60sec = 0  # waiting time for particiants to join the game (60)
-wait40sec = 40  # waiting time for particiants to join the game (60
-guessTime = 40  # waiting time to guess the word
+wait40sec = 20  # waiting time for particiants to join the game (60
+guessTime = 20  # waiting time to guess the word
 
-# variiiii
-sec60 = 60
+# var
+sec60 = 7
 
+another_var = True
 DB = DB_class.DynamoDB_con()
 # DB.read_read('TB_JumbleWord_Bank')
 
@@ -62,11 +63,14 @@ def get_jumble():
         
 # # Join timer (60s) and word timer (40s)
 
-def start_timer(name, sec, game, message):
+def start_timer(name, sec, message):
     try:
         global wait60sec, runner
         for i in range(sec, -1, -1):
+            # print('name: ',name,"sec: " ,sec,"game: ", game ,'running: ',runner)
+            print(i,sec,'time_breaker: ',time_breaker)
             if time_breaker:
+                print('i am the breaker ')
                 break
             time.sleep(1)
             wait60sec = i
@@ -80,7 +84,7 @@ def start_timer(name, sec, game, message):
                     jumble.auto_next_word(message)
                     runner == 2
                 elif name == 'join-wait':
-                    jumble.join_game(game, message, 'auto', i)
+                    jumble.join_game(message, 'auto', i)
                     runner == 2
                 elif name == 'ques-wait' and runner == 3:  # after 40 sec of 1 word
                     jumble.winner(message, False)
